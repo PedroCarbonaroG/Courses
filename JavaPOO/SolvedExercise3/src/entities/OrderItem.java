@@ -5,7 +5,7 @@ public class OrderItem {
     private short quantity;
     private double price;
 
-    private Product product;
+    private Product product = new Product();
 
     public OrderItem() {
     }
@@ -36,6 +36,6 @@ public class OrderItem {
     }
 
     public double subTotal() {
-        return 0.0;
+        return product.getPrice() * quantity;
     }
 }
