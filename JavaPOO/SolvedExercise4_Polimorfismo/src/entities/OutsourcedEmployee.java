@@ -6,7 +6,8 @@ public class OutsourcedEmployee extends Employee {
 
     public OutsourcedEmployee() {
     }
-    public OutsourcedEmployee(double additionalCharge) {
+    public OutsourcedEmployee(String name, short hours, double valuePerHour, double additionalCharge) {
+        super(name, hours, valuePerHour);
         this.additionalCharge = additionalCharge;
     }
 
@@ -19,6 +20,6 @@ public class OutsourcedEmployee extends Employee {
 
     @Override
     public final double payment() {
-        return valuePerHour * hours + additionalCharge * 1.1;
+        return super.payment() + additionalCharge * 1.1;
     }
 }
