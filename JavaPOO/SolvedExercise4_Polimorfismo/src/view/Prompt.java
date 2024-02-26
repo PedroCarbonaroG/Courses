@@ -23,9 +23,7 @@ public final class Prompt {
 
             System.out.print("Name: "); String name = sc.nextLine();
             System.out.print("Hours: "); short hours = sc.nextShort();
-            sc.nextLine(); //Cleaning the SCANNER buffer
             System.out.print("Value per hour: "); double valuePerHour = sc.nextDouble();
-            sc.nextLine(); //Cleaning the SCANNER buffer
             
             if (answer == 'y') {
                 System.out.print("Additional charge: "); double additionalCharge = sc.nextDouble();
