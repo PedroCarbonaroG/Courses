@@ -25,12 +25,17 @@ public class Individual extends AccountType {
     }
 
     @Override
-    public double taxesValue() {
+    public final double taxesValue() {
         double tax = 0;
         
         tax = (this.getYearIncome() < DEFAULT_VALUE_YEAR) ? getYearIncome() * MIN_TAX : getYearIncome() * MAX_TAX;
         if (healthExpense > 0) { tax -= (healthExpense * HEATH_DESCOUNT_TAX); }
 
         return tax;
+    }
+
+    @Override
+    public final String toString() {
+        return this.getName() + ": $ " + String.format("%.2f", taxesValue());
     }
 }

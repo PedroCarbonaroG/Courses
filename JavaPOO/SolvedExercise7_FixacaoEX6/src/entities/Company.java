@@ -24,7 +24,12 @@ public class Company extends AccountType {
     }
 
     @Override
-    public double taxesValue() {
+    public final double taxesValue() {
         return (employeesNum < MIN_EMPLOYEES_TO_DISCOUNT) ? this.getYearIncome() * DEFAULT_TAX : this.getYearIncome() * LOW_TAX;
+    }
+
+    @Override
+    public final String toString() {
+        return this.getName() + ": $ " + String.format("%.2f", taxesValue());
     }
 }
