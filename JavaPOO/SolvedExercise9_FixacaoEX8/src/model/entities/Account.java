@@ -45,8 +45,15 @@ public class Account {
     }
 
     public void deposit(double amount) throws TransactionException {
+        if (amount < 0) { throw new TransactionException("You can't deposit negative values"); }
+        this.balance = amount;
     }
 
     public void withdraw(double amount) throws TransactionException {
+
+        if (amount > withdrawLimit) { throw new TransactionException("The amount exceeds withdraw limit"); }
+        if (amount > balance) { throw new TransactionException("Not enough balance"); }
+
+        this.balance -= amount;
     }
 }
