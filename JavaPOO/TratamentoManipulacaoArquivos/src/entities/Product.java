@@ -40,7 +40,7 @@ public class Product {
 
     @Override
     public final String toString() {
-        return name + "," + finalPrice();
+        return name + "," + String.format("%.2f", finalPrice());
     }
 
 }
