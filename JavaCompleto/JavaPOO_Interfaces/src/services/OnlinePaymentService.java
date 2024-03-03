@@ -1,4 +1,4 @@
-package entities.services;
+package services;
 
 public interface OnlinePaymentService {
     

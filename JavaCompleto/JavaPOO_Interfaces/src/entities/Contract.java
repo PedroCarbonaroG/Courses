@@ -1,26 +1,27 @@
 package entities;
 
+import java.time.LocalDate;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Contract {
-    
+
     private short number;
-    private Date date;
+    private LocalDate date;
     private double totalValue;
 
     private List<Installment> installments = new ArrayList<>();
     
     public Contract() {
     }
-    public Contract(short number, Date date, double totalValue) {
+    public Contract(short number, LocalDate date, double totalValue) {
         this.number = number;
         this.date = date;
         this.totalValue = totalValue;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
     public short getNumber() {
@@ -33,7 +34,7 @@ public class Contract {
         return totalValue;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
     public void setNumber(short number) {
@@ -46,15 +47,6 @@ public class Contract {
 
     public void removeInstallment(Installment installment) {
         this.installments.remove(installment);
-    }
-
-    public void setTotalValue() {
-        double totalValue = 0;
-        for (Installment i : installments) {
-            totalValue += i.getAmount();
-        }
-
-        this.totalValue = totalValue;
     }
 
 }
