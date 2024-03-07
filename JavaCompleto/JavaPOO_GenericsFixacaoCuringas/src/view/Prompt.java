@@ -37,16 +37,16 @@ public class Prompt {
         System.out.println("Total circle area: " + String.format("%.2f", UtilityService.totalArea(myCircles)));
         System.out.println("Total rectangle area: " + String.format("%.2f", UtilityService.totalArea(myRectangles)));
 
-        //COPY TESTS   
+        //COPY TESTS
         UtilityService.copy(myShapes, myObjs);
-        System.out.println("content");
+        System.out.println("content: " + String.format("%.2f", UtilityService.totalArea(myObjs)));
+        myObjs.clear();
 
         UtilityService.copy(myCircles, myObjs);
-        System.out.println("content");
+        System.out.println("content: " + String.format("%.2f", UtilityService.totalArea(myObjs)));
+        myObjs.clear();
 
         UtilityService.copy(myRectangles, myObjs);
-        System.out.println("content");
+        System.out.println("content: " + String.format("%.2f", UtilityService.totalArea(myObjs)));
     }
-
-
 }

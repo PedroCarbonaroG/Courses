@@ -30,5 +30,10 @@ public class Rectangle implements Shape {
     public double area() {
         return width * height;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%.2f", area());
+    }
     
 }

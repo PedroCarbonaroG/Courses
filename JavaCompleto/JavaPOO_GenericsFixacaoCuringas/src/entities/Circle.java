@@ -22,5 +22,9 @@ public class Circle implements Shape {
         return Math.PI * radius * radius;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%.2f", area());
+    }
 
 }
