@@ -18,10 +18,4 @@ public class UtilityService {
 
         for (Shape s : source) { target.add(s); }
     }
-
-    public static void clear(List<?> source) {
-        for (Object s : source) {
-            source.remove(s);
-        }
-    }
 }
