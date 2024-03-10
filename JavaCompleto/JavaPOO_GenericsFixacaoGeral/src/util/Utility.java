@@ -30,7 +30,11 @@ public abstract class Utility {
         return list;
     }
 
-    public static <T> Map<T, Integer> countFrequency(List<T> list) {
-        return null;
+    public static <T> Map<T, Integer> countFrequency(List<T> source) {
+        Map<T, Integer> list = new TreeMap<>();
+        for (T content : source) {
+            list.put(content, list.containsKey(content) ? list.get(content) + 1 : 1);
+        }
+        return list;
     }
 }

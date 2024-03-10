@@ -53,9 +53,9 @@ public class Prompt {
         stringList01.addAll(Arrays.asList("Piter", "Jonas" , "Lisa", "Lisa", "Fred", "Piter", "Jonas"));
         doubleList01.addAll(Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0));
 
-        System.out.println(new HashSet<>(Utility.findUniqueElements(integersList01)).toString());
-        System.out.println(new HashSet<>(Utility.findUniqueElements(stringList01)).toString());
-        System.out.println(new HashSet<>(Utility.findUniqueElements(doubleList01)).toString());
+        System.out.println(new HashSet<>(Utility.findUniqueElements(integersList01)));
+        System.out.println(new HashSet<>(Utility.findUniqueElements(stringList01)));
+        System.out.println(new HashSet<>(Utility.findUniqueElements(doubleList01)));
         System.out.println();
         //Can be used like this too
         // System.out.println(new HashSet<>(integersList01));
@@ -69,13 +69,13 @@ public class Prompt {
 
         //EX03
         System.out.println("Results of Exercise 3: ");
-        integersList01.addAll(Arrays.asList(1, 2, 3, 4, 5, 1, 2, 3));
-        stringList01.addAll(Arrays.asList("Piter", "Jonas" , "Lisa", "Lisa", "Fred", "Piter", "Jonas"));
-        doubleList01.addAll(Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0));
+        integersList03.addAll(Arrays.asList(1, 2, 3, 4, 5, 1, 2, 3));
+        stringList03.addAll(Arrays.asList("Piter", "Jonas" , "Lisa", "Lisa", "Fred", "Piter", "Jonas"));
+        doubleList03.addAll(Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0));
 
-        System.out.println(new LinkedHashMap<>(Utility.countFrequency(integersList01)).toString());
-        System.out.println(new LinkedHashMap<>(Utility.countFrequency(stringList01)).toString());
-        System.out.println(new LinkedHashMap<>(Utility.countFrequency(doubleList01)).toString());
+        System.out.println(new LinkedHashMap<>(Utility.countFrequency(integersList03)));
+        System.out.println(new LinkedHashMap<>(Utility.countFrequency(stringList03)));
+        System.out.println(new LinkedHashMap<>(Utility.countFrequency(doubleList03)));
         System.out.println();
     }
 }
