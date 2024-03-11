@@ -4,7 +4,7 @@ import java.util.List;
 
 import entities.Shape;
 
-public class UtilityService {
+public abstract class UtilityService {
     
     public static double totalArea(List<? extends Object> list) {
         double sum = 0;
@@ -15,7 +15,6 @@ public class UtilityService {
     }
 
     public static void copy(List<? extends Shape> source, List<? super Shape> target) {
-
         for (Shape s : source) { target.add(s); }
     }
 }
