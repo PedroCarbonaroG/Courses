@@ -4,7 +4,7 @@ This repository serves as a comprehensive record of my professional development,
 ## Courses
 
 ### 1. Java Full Stack Development - Object-Oriented Programming + Projects
-This section includes materials from the "Java COMPLETO Programação Orientada a Objetos + Projetos" course.
+This section includes materials from the "Java COMPLETO Programação Orientada a Objetos + Projetos" udemy course.
 
 #### Contents:
 - Complete JavaPOO (Object-Oriented Programming) coverage
@@ -16,7 +16,7 @@ This section includes materials from the "Java COMPLETO Programação Orientada 
 - JavaFX applications and theoretical understanding
 
 #### Repository Folder:
-- `JavaCompleto`
+- `JavaFULL`
 
 ## License
 This repository is open-source and available under the [MIT License](LICENSE).
