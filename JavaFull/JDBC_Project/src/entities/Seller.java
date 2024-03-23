@@ -124,4 +124,43 @@ public abstract class Seller extends DB {
 
         return updated;
     }
+
+    public static boolean delete(int sellerId) throws SQLException {
+        boolean deleted = false;
+
+        ps = conn.prepareStatement("DELETE FROM seller WHERE (Id = ?)");
+
+        ps.setInt(1, sellerId);
+
+        ps.execute();
+        deleted = true;
+
+        return deleted;
+    }
+
+    public static boolean deleteByName(String name) throws SQLException {
+        boolean deleted = false;
+
+        ps = conn.prepareStatement("DELETE FROM seller WHERE (Name = ?)");
+
+        ps.setString(1, name);
+
+        ps.execute();
+        deleted = true;
+
+        return deleted;
+    }
+
+    public static boolean deleteByEmail(String email) throws SQLException {
+        boolean deleted = false;
+
+        ps = conn.prepareStatement("DELETE FROM seller WHERE (Email = ?)");
+
+        ps.setString(1, email);
+
+        ps.execute();
+        deleted = true;
+
+        return deleted;
+    }
 }

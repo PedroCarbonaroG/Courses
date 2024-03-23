@@ -39,6 +39,32 @@ public abstract class Department extends DB {
         return inserted;
     }
 
+    public static boolean delete(int departmentId) throws SQLException {
+        boolean deleted = false;
+
+        ps = conn.prepareStatement("DELETE FROM department WHERE (Id = ?)");
+
+        ps.setInt(1, departmentId);
+
+        ps.execute();
+        deleted = true;
+
+        return deleted;
+    }
+
+    public static boolean deleteByName(String name) throws SQLException {
+        boolean deleted = false;
+
+        ps = conn.prepareStatement("DELETE FROM department WHERE (Name = ?)");
+
+        ps.setString(1, name);
+
+        ps.execute();
+        deleted = true;
+
+        return deleted;
+    }
+
     public static boolean updateName(String departmentName, String newDepartmentName) throws SQLException {
         boolean updated = false;
 
@@ -52,4 +78,6 @@ public abstract class Department extends DB {
 
         return updated;
     }
+
+    
 }

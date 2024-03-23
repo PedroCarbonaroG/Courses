@@ -68,6 +68,28 @@ public class Prompt {
             System.out.println(Seller.getRows());
 
             System.out.println("===========================================================");
+            System.out.println("Finnaly, deleting the chosen rows");
+
+            System.out.println("Before the deleting:");
+
+            System.out.println("Departments:");
+            System.out.println(Department.getRows());
+
+            System.out.println("Sellers:");
+            System.out.println(Seller.getRows());
+
+            System.out.println("Deleting...");
+
+            Seller.deleteByName("newPiter");
+            Department.deleteByName("newFood");
+
+            System.out.println("After the deleting:");
+
+            System.out.println("Departments:");
+            System.out.println(Department.getRows());
+
+            System.out.println("Sellers:");
+            System.out.println(Seller.getRows());
         }
         catch(SQLException e) { e.printStackTrace(); }
         catch(ParseException e) { e.printStackTrace(); }
