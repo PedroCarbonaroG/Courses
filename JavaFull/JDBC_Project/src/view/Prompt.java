@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import entities.Department;
 import entities.Seller;
 
+import DB.DbException;
 import DB.DB;
 
 public class Prompt {
@@ -23,7 +24,7 @@ public class Prompt {
             System.out.println();
 
             DB.getConnection();
-
+            
             System.out.println("Departments:");
             System.out.println(Department.getRows());
 
@@ -91,7 +92,10 @@ public class Prompt {
             System.out.println("Sellers:");
             System.out.println(Seller.getRows());
         }
-        catch(SQLException e) { e.printStackTrace(); }
+        catch (SQLException e) {
+            try { DB.getRollBack(); throw new DbException("Transaction rolled back! Caused by: " + e.getMessage()); } 
+            catch (SQLException e1) { throw new DbException("Error trying to rollback! Caused by: " + e1.getMessage()); }
+        }
         catch(ParseException e) { e.printStackTrace(); }
 
         finally {

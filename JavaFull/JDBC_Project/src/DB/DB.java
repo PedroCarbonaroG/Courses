@@ -68,6 +68,7 @@ public abstract class DB {
     }
 
     protected static int getSellerLastId() throws SQLException {
+        conn.setAutoCommit(false);
         int newId = 0;
 
         String getLastIdQuery = "SELECT MAX(Id) AS LastId FROM seller";
@@ -75,10 +76,12 @@ public abstract class DB {
 
         if (rs.next()) { newId = rs.getInt("LastId") + 1; }
 
+        conn.commit();
         return newId;
     }
 
     protected static int getDepartmentLastId() throws SQLException {
+        conn.setAutoCommit(false);
         int newId = 0;
 
         String getLastIdQuery = "SELECT MAX(Id) AS LastId FROM department";
@@ -86,7 +89,12 @@ public abstract class DB {
 
         if (rs.next()) { newId = rs.getInt("LastId") + 1; }
 
+        conn.commit();
         return newId;
+    }
+
+    public static void getRollBack() throws SQLException {
+        conn.rollback();
     }
 
 }
