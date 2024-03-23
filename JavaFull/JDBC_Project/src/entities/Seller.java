@@ -54,4 +54,74 @@ public abstract class Seller extends DB {
 
         return inserted;
     }
+
+    public static boolean updateName(String name, String newName) throws SQLException {
+        boolean updated = false;
+
+        ps = conn.prepareStatement("UPDATE seller SET Name = ? Where (Name = ?)");
+
+        ps.setString(1, newName);
+        ps.setString(2, name);
+
+        ps.execute();
+        updated = true;
+
+        return updated;
+    }
+
+    public static boolean updateEmail(String email, String newEmail) throws SQLException {
+        boolean updated = false;
+
+        ps = conn.prepareStatement("UPDATE seller SET Email = ? Where (Email = ?)");
+
+        ps.setString(1, newEmail);
+        ps.setString(2, email);
+
+        ps.execute();
+        updated = true;
+
+        return updated;
+    }
+
+    public static boolean updateBirthDate(Date date, Date newDate) throws SQLException {
+        boolean updated = false;
+
+        ps = conn.prepareStatement("UPDATE seller SET BirthDate = ? Where (BirthDate = ?)");
+
+        ps.setDate(1, new java.sql.Date(newDate.getTime()));
+        ps.setDate(2, new java.sql.Date(date.getTime()));
+
+        ps.execute();
+        updated = true;
+
+        return updated;
+    }
+
+    public static boolean updateBaseSalary(double percentage) throws SQLException {
+        boolean updated = false;
+        
+        ps = conn.prepareStatement("UPDATE seller SET BaseSalary =  BaseSalary * ? WHERE (DepartmentId = ?)");
+
+        ps.setDouble(1, percentage);
+        ps.setInt(2, 1);
+
+        ps.execute();
+        updated = true;
+
+        return updated;
+    }
+
+    public static boolean updateDepartmentId(int sellerId, int newDepartmentId) throws SQLException {
+        boolean updated = false;
+
+        ps = conn.prepareStatement("UPDATE seller SET DepartmentId = ? Where (Id = ?)");
+
+        ps.setInt(1, newDepartmentId);
+        ps.setInt(2, sellerId);
+
+        ps.execute();
+        updated = true;
+
+        return updated;
+    }
 }

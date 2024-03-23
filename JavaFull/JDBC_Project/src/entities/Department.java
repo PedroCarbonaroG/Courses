@@ -38,4 +38,18 @@ public abstract class Department extends DB {
 
         return inserted;
     }
+
+    public static boolean updateName(String departmentName, String newDepartmentName) throws SQLException {
+        boolean updated = false;
+
+        ps = conn.prepareStatement("UPDATE department SET Name = ? Where (Name = ?)");
+
+        ps.setString(1, newDepartmentName);
+        ps.setString(2, departmentName);
+
+        ps.execute();
+        updated = true;
+
+        return updated;
+    }
 }

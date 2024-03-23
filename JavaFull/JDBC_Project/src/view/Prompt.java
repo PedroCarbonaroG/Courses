@@ -30,7 +30,6 @@ public class Prompt {
             System.out.println("Sellers:");
             System.out.println(Seller.getRows());
 
-            System.out.println("===========================================================");
             System.out.println("Inserting data into seller and department fields in dataBase MySQL:");
 
             Seller.add("Piter", "piter@gmail.com", sdf.parse("2002/04/06"), 3000, 1);
@@ -41,7 +40,34 @@ public class Prompt {
             System.out.println(Seller.getRows());
 
             System.out.println("===========================================================");
+            System.out.println("Updating rows from Sellers and Departments");
 
+            System.out.println("Before the updating:");
+
+            System.out.println("Departments:");
+            System.out.println(Department.getRows());
+
+            System.out.println("Sellers:");
+            System.out.println(Seller.getRows());
+
+            System.out.println("Updating...");
+            Seller.updateName("piter", "newPiter");
+            Seller.updateEmail("piter@gmail.com", "newPiter@gmail.com");
+            Seller.updateBirthDate(sdf.parse("2002/04/06"), sdf.parse("2002/04/08"));
+            Seller.updateBaseSalary(1.1);
+            Seller.updateDepartmentId(7, 2);
+
+            Department.updateName("Food", "newFood");
+
+            System.out.println("After the updating:");
+
+            System.out.println("Departments:");
+            System.out.println(Department.getRows());
+
+            System.out.println("Sellers:");
+            System.out.println(Seller.getRows());
+
+            System.out.println("===========================================================");
         }
         catch(SQLException e) { e.printStackTrace(); }
         catch(ParseException e) { e.printStackTrace(); }
