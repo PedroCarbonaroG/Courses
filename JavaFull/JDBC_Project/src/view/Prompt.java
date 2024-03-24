@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 import java.sql.SQLException;
+import java.sql.Connection;
 
 import entities.Department;
 import entities.Seller;
@@ -14,16 +15,17 @@ import DB.DB;
 
 public class Prompt {
 
+    private static Connection conn;
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
     public void startPrompt() {
 
         try {
+            conn = DB.getConnection();
+
             System.out.println("===========================================================");
             System.out.println("Showing of departments and sellers from dataBase MySQL:");
             System.out.println();
-
-            DB.getConnection();
             
             System.out.println("Departments:");
             System.out.println(Department.getRows());
@@ -33,8 +35,12 @@ public class Prompt {
 
             System.out.println("Inserting data into seller and department fields in dataBase MySQL:");
 
+            conn.setAutoCommit(false);
+
             Seller.add("Piter", "piter@gmail.com", sdf.parse("2002/04/06"), 3000, 1);
             Department.add("Food");
+
+            conn.commit();
 
             System.out.println("After the insertions, fields in dataBase MySQL:");
             System.out.println(Department.getRows());
@@ -51,6 +57,8 @@ public class Prompt {
             System.out.println("Sellers:");
             System.out.println(Seller.getRows());
 
+            conn.setAutoCommit(false);
+
             System.out.println("Updating...");
             Seller.updateName("piter", "newPiter");
             Seller.updateEmail("piter@gmail.com", "newPiter@gmail.com");
@@ -59,6 +67,8 @@ public class Prompt {
             Seller.updateDepartmentId(7, 2);
 
             Department.updateName("Food", "newFood");
+
+            conn.commit();
 
             System.out.println("After the updating:");
 
@@ -81,8 +91,12 @@ public class Prompt {
 
             System.out.println("Deleting...");
 
+            conn.setAutoCommit(false);
+
             Seller.deleteByName("newPiter");
             Department.deleteByName("newFood");
+
+            conn.commit();
 
             System.out.println("After the deleting:");
 
@@ -103,6 +117,8 @@ public class Prompt {
             DB.closeStatement();
             DB.closeResultSet();
             DB.closeConnection();
+            try { conn.close(); }
+            catch (SQLException e) { throw new DbException("PromptConnector failed! Caused by: " + e.getMessage()); }
         }
     }
 }

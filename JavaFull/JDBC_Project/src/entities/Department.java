@@ -22,8 +22,6 @@ public abstract class Department extends DB {
     public static boolean add(String name) throws SQLException, ParseException {
         boolean inserted = false;
 
-        conn.setAutoCommit(false);
-
         ps = conn.prepareStatement(
             "INSERT INTO department "
             + "(Id, Name) "
@@ -38,14 +36,11 @@ public abstract class Department extends DB {
         ps.execute();
         inserted = true;
 
-        conn.commit();
         return inserted;
     }
 
     public static boolean delete(int departmentId) throws SQLException {
         boolean deleted = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("DELETE FROM department WHERE (Id = ?)");
 
@@ -54,14 +49,11 @@ public abstract class Department extends DB {
         ps.execute();
         deleted = true;
 
-        conn.commit();
         return deleted;
     }
 
     public static boolean deleteByName(String name) throws SQLException {
         boolean deleted = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("DELETE FROM department WHERE (Name = ?)");
 
@@ -70,14 +62,11 @@ public abstract class Department extends DB {
         ps.execute();
         deleted = true;
 
-        conn.commit();
         return deleted;
     }
 
     public static boolean updateName(String departmentName, String newDepartmentName) throws SQLException {
         boolean updated = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("UPDATE department SET Name = ? Where (Name = ?)");
 
@@ -87,7 +76,6 @@ public abstract class Department extends DB {
         ps.execute();
         updated = true;
 
-        conn.commit();
         return updated;
     }
 

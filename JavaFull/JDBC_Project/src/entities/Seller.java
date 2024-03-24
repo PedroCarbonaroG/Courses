@@ -34,8 +34,6 @@ public abstract class Seller extends DB {
     public static boolean add(String name, String email, Date birthDate, double baseSalary, int departmentId) throws SQLException, ParseException {
         boolean inserted = false;
 
-        conn.setAutoCommit(false);
-
         ps = conn.prepareStatement(
             "INSERT INTO seller "
             + "(Id, Name, Email, BirthDate, BaseSalary, DepartmentId) "
@@ -54,14 +52,11 @@ public abstract class Seller extends DB {
         ps.execute();
         inserted = true;
 
-        conn.commit();
         return inserted;
     }
 
     public static boolean updateName(String name, String newName) throws SQLException {
         boolean updated = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("UPDATE seller SET Name = ? Where (Name = ?)");
 
@@ -71,14 +66,11 @@ public abstract class Seller extends DB {
         ps.execute();
         updated = true;
 
-        conn.commit();
         return updated;
     }
 
     public static boolean updateEmail(String email, String newEmail) throws SQLException {
         boolean updated = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("UPDATE seller SET Email = ? Where (Email = ?)");
 
@@ -88,14 +80,11 @@ public abstract class Seller extends DB {
         ps.execute();
         updated = true;
 
-        conn.commit();
         return updated;
     }
 
     public static boolean updateBirthDate(Date date, Date newDate) throws SQLException {
         boolean updated = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("UPDATE seller SET BirthDate = ? Where (BirthDate = ?)");
 
@@ -105,16 +94,13 @@ public abstract class Seller extends DB {
         ps.execute();
         updated = true;
 
-        conn.commit();
         return updated;
     }
 
     public static boolean updateBaseSalary(double percentage) throws SQLException {
         boolean updated = false;
-        
-        conn.setAutoCommit(false);
 
-        ps = conn.prepareStatement("UPDATE seller SET BaseSalary =  BaseSalary * ? WHERE (DepartmentId = ?)");
+        ps = conn.prepareStatement("UPDATE seller SET BaseSalary = ROUND(BaseSalary * ?, 2) WHERE (DepartmentId = ?)");
 
         ps.setDouble(1, percentage);
         ps.setInt(2, 1);
@@ -122,14 +108,11 @@ public abstract class Seller extends DB {
         ps.execute();
         updated = true;
 
-        conn.commit();
         return updated;
     }
 
     public static boolean updateDepartmentId(int sellerId, int newDepartmentId) throws SQLException {
         boolean updated = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("UPDATE seller SET DepartmentId = ? Where (Id = ?)");
 
@@ -139,14 +122,11 @@ public abstract class Seller extends DB {
         ps.execute();
         updated = true;
 
-        conn.commit();
         return updated;
     }
 
     public static boolean delete(int sellerId) throws SQLException {
         boolean deleted = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("DELETE FROM seller WHERE (Id = ?)");
 
@@ -155,14 +135,11 @@ public abstract class Seller extends DB {
         ps.execute();
         deleted = true;
 
-        conn.commit();
         return deleted;
     }
 
     public static boolean deleteByName(String name) throws SQLException {
         boolean deleted = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("DELETE FROM seller WHERE (Name = ?)");
 
@@ -171,14 +148,11 @@ public abstract class Seller extends DB {
         ps.execute();
         deleted = true;
 
-        conn.commit();
         return deleted;
     }
 
     public static boolean deleteByEmail(String email) throws SQLException {
         boolean deleted = false;
-
-        conn.setAutoCommit(false);
 
         ps = conn.prepareStatement("DELETE FROM seller WHERE (Email = ?)");
 
@@ -187,7 +161,6 @@ public abstract class Seller extends DB {
         ps.execute();
         deleted = true;
 
-        conn.commit();
         return deleted;
     }
 }

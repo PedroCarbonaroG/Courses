@@ -19,7 +19,7 @@ public abstract class DB {
     protected static Statement st = null;
     protected static ResultSet rs = null;
 
-    public static void getConnection() {
+    public static Connection getConnection() {
         if (conn == null) {
             try {
                 Properties props = loadProperties();
@@ -29,6 +29,7 @@ public abstract class DB {
             }
             catch(SQLException e) { throw new DbException(e.getMessage()); }
         }
+        return conn;
     }
     private static Properties loadProperties() {
         try (FileInputStream fs = new FileInputStream("db.properties")) {
