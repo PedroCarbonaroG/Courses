@@ -7,7 +7,6 @@ This repository houses a comprehensive implementation of java coding connecting 
 ### Code Implementation
 The repository includes a fully functional JDBC project that demonstrates the application of OOP principles and design patterns. Key features and aspects covered in the project:
 
-- Usage of DAO pattern to code structure
 - Complete implementation using Java
 - Utilization of Object-Oriented Programming (OOP) principles
 - Integration of design patterns for code organization and maintainability
@@ -31,4 +30,4 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## License
 
 This repository is open-source and governed by the [MIT License](LICENSE). Please review the license before using or contributing to this project.
-Thank you for your interest JDBC project!
+Thank you for your interest in JDBC project!
