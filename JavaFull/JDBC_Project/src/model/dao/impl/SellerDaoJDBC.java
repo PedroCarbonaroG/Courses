@@ -1,14 +1,18 @@
 package model.dao.impl;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import db.DB;
+import db.DbException;
 
 import model.dao.SellerDao;
+
 import model.entities.Department;
 import model.entities.Seller;
 
@@ -38,8 +42,6 @@ public class SellerDaoJDBC extends DB implements SellerDao {
 
     @Override
     public Seller findById(Integer id) throws SQLException {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
 
         ps = conn.prepareStatement(
             "SELECT seller.*, department.Name as DpName " +
@@ -47,6 +49,7 @@ public class SellerDaoJDBC extends DB implements SellerDao {
             "ON seller.DepartmentId = department.Id " +
             "WHERE seller.Id = ?"
         );
+
         ps.setInt(1, id);
         rs = ps.executeQuery();
 
@@ -65,6 +68,68 @@ public class SellerDaoJDBC extends DB implements SellerDao {
     public List<Seller> findAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+    }
+
+    @Override
+    public List<Seller> findByDepartment(Department department) throws SQLException {
+
+        if (department.getName() == null || department.getId() == null) {
+            throw new DbException("Trying to findByDepartment, Name or Id are null");
+        }
+
+        List<Seller> list = new ArrayList<>();
+
+        ps = conn.prepareStatement(
+            "SELECT seller.*, Department.Name as DpName " +
+            "FROM seller INNER JOIN department " +
+            "ON seller.DepartmentId = department.Id " +
+            "WHERE DepartmentId = ? " +
+            "ORDER BY name"
+        );
+
+        ps.setInt(1, department.getId());
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            list.add(new Seller(instantiateSeller(rs, department)));
+        }
+
+        return list;
+    }
+    @Override
+    public List<Seller> findByDepartmentId(Integer departmentId) throws SQLException {
+
+        if (departmentId == null) {
+            throw new DbException("Trying to findByDepartmentId, Id are null");
+        }
+        
+        List<Seller> list = new ArrayList<>();
+        Map<Integer, Department> map = new HashMap<>();
+
+        ps = conn.prepareStatement(
+            "SELECT seller.*, Department.Name as DpName " +
+            "FROM seller INNER JOIN department " +
+            "ON seller.DepartmentId = department.Id " +
+            "WHERE DepartmentId = ? " +
+            "ORDER BY name"
+        );
+
+        ps.setInt(1, departmentId);
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            Department dp = map.get(rs.getInt("DepartmentId"));
+
+            if (dp == null) {
+                dp = instantiateDepartment(rs);
+                map.put(rs.getInt("DepartmentId"), dp);
+            }
+
+            list.add(new Seller(instantiateSeller(rs, dp)));
+        }
+
+        return list;
     }
 
     private Department instantiateDepartment(ResultSet rs) throws SQLException {

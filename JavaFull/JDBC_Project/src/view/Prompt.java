@@ -2,6 +2,8 @@ package view;
 
 import java.sql.SQLException;
 
+import java.util.List;
+
 import db.DB;
 import db.DbException;
 
@@ -21,8 +23,21 @@ public class Prompt {
             Seller seller = sellerDao.findById(3);
             System.out.println(seller);
 
-            System.out.println("\n======================= TEST 2 - FIND BY ID =======================");
+            System.out.println("\n======================= TEST 2 - FIND BY DEPARTMENT =======================");
+            List<Seller> list1 = sellerDao.findByDepartment(seller.getDepartment());
+            for (Seller s : list1) {
+                System.out.println(s);
+            }
+
+            System.out.println("\n======================= TEST 3 - FIND BY DEPARTMENT ID =======================");
+            List<Seller> list2 = sellerDao.findByDepartmentId(2);
+            for (Seller s : list2) {
+                System.out.println(s);
+            }
+
+            System.out.println("\n======================= TEST 4 - ??? =======================");
         }
+        
         catch (SQLException e) { throw new DbException(e.getMessage()); }
         
         finally {

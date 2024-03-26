@@ -28,6 +28,14 @@ public class Seller implements Serializable {
         this.baseSalary = baseSalary;
         this.department = new Department(department);
     }
+    public Seller(Seller seller) {
+        this.id = seller.id;
+        this.name = seller.name;
+        this.email = seller.email;
+        this.birthDate = seller.birthDate;
+        this.baseSalary = seller.baseSalary;
+        this.department = seller.department;
+    }
 
     public double getBaseSalary() {
         return baseSalary;
