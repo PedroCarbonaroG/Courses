@@ -1,22 +1,21 @@
 package model.dao.impl;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.List;
 
 import db.DB;
+
 import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 
-public class SellerDaoJDBC implements SellerDao {
-
-    private Connection conn;
+public class SellerDaoJDBC extends DB implements SellerDao {
 
     public SellerDaoJDBC() {
-        this.conn = DB.getConnection();
+        conn = DB.getConnection();
     }
 
     @Override
@@ -41,7 +40,7 @@ public class SellerDaoJDBC implements SellerDao {
     public Seller findById(Integer id) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         ps = conn.prepareStatement(
             "SELECT seller.*, department.Name as DpName " +
             "FROM seller INNER JOIN department " +
@@ -52,25 +51,13 @@ public class SellerDaoJDBC implements SellerDao {
         rs = ps.executeQuery();
 
         if (rs.next()) {
-            Department dp = new Department();
-            dp.setId(rs.getInt("DepartmentId"));
-            dp.setName(rs.getString("DpName"));
 
-            Seller seller = new Seller();
-            seller.setId(rs.getInt("Id"));
-            seller.setName(rs.getString("Name"));
-            seller.setEmail(rs.getString("Email"));
-            seller.setBirthDate(rs.getDate("BirthDate"));
-            seller.setBaseSalary(rs.getDouble("BaseSalary"));
-            seller.setDepartment(dp);
+            Department dp = instantiateDepartment(rs);
+            Seller seller = instantiateSeller(rs, dp);
 
-            ps.close();
-            rs.close();
             return seller;
         }
 
-        ps.close();
-        rs.close();
         return null;
     }
 
@@ -78,6 +65,24 @@ public class SellerDaoJDBC implements SellerDao {
     public List<Seller> findAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+    }
+
+    private Department instantiateDepartment(ResultSet rs) throws SQLException {
+        Department dp = new Department();
+        dp.setId(rs.getInt("DepartmentId"));
+        dp.setName(rs.getString("DpName"));
+        return dp;
+    }
+    private Seller instantiateSeller(ResultSet rs, Department dp) throws SQLException {
+        Seller seller = new Seller();
+        seller.setId(rs.getInt("Id"));
+        seller.setName(rs.getString("Name"));
+        seller.setEmail(rs.getString("Email"));
+        seller.setBirthDate(rs.getDate("BirthDate"));
+        seller.setBaseSalary(rs.getDouble("BaseSalary"));
+        seller.setDepartment(dp);
+
+        return seller;
     }
 
 }
