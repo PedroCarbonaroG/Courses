@@ -56,6 +56,9 @@ public class Prompt {
             System.out.println(sellerDao.findById(5));
 
             System.out.println("\n======================= TEST 7 - DELETE =======================");
+            if (sellerDao.deleteById(7)) {
+                System.out.println("Deleted!");
+            }
         }
 
         catch (SQLException e) { throw new DbException(e.getMessage()); }

@@ -75,7 +75,15 @@ public class SellerDaoJDBC extends DB implements SellerDao {
     public boolean deleteById(Integer id) throws SQLException {
         boolean deleted = false;
 
-        //...
+        ps = conn.prepareStatement(
+            "DELETE FROM seller " +
+            "WHERE Id = ?"
+        );
+
+        ps.setInt(1, id);
+
+        ps.executeUpdate();
+        deleted = true;
 
         return deleted;
     }
