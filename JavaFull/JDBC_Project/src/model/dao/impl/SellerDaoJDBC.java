@@ -20,24 +20,50 @@ public class SellerDaoJDBC extends DB implements SellerDao {
 
     public SellerDaoJDBC() {
         conn = DB.getConnection();
+        auxConn = DB.getConnection();
     }
 
     @Override
-    public boolean add(Seller seller) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+    public boolean add(Seller seller) throws SQLException {
+        boolean added = false;
+
+        ps = conn.prepareStatement(
+            "INSERT INTO seller " +
+            "(Id, Name, Email, BirthDate, BaseSalary, DepartmentId) " +
+            "VALUES " +
+            "(?, ?, ?, ?, ?, ?)"
+        );
+
+        seller.setId(getSellerLastId());
+        ps.setInt(1, getSellerLastId());
+        ps.setString(2, seller.getName());
+        ps.setString(3, seller.getEmail());
+        ps.setDate(4, new java.sql.Date(seller.getBirthDate().getTime()));
+        ps.setDouble(5, seller.getBaseSalary());
+        ps.setInt(6, seller.getDepartment().getId());
+
+        ps.executeUpdate();
+        added = true;
+
+        return added;
     }
 
     @Override
-    public boolean update(Seller seller) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public boolean update(Seller seller) throws SQLException {
+        boolean updated = false;
+
+        //...
+
+        return updated;
     }
 
     @Override
-    public boolean deleteById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+    public boolean deleteById(Integer id) throws SQLException {
+        boolean deleted = false;
+
+        //...
+
+        return deleted;
     }
 
     @Override
@@ -172,5 +198,4 @@ public class SellerDaoJDBC extends DB implements SellerDao {
 
         return seller;
     }
-
 }

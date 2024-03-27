@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -15,7 +16,9 @@ public class DB {
 
 	protected static PreparedStatement ps = null;
     protected static Connection conn = null;
+	protected static Connection auxConn = null;
     protected static ResultSet rs = null;
+	protected static Statement st = null;
 
 	public static Connection getConnection() {
 		if (conn == null) {
@@ -62,6 +65,16 @@ public class DB {
 		}
 	}
 
+	public static void closeStatement() {
+		if (st != null) {
+			try {
+				st.close();
+			} catch (SQLException e) {
+				throw new DbException(e.getMessage());
+			}
+		}
+	}
+
 	public static void closeResultSet() {
 		if (rs != null) {
 			try {
@@ -71,4 +84,30 @@ public class DB {
 			}
 		}
 	}
+
+	protected static int getSellerLastId() throws SQLException {
+        int newId = 0;
+
+        String getLastIdQuery = "SELECT MAX(Id) AS LastId FROM seller";
+
+		st = auxConn.createStatement();
+        rs = st.executeQuery(getLastIdQuery);
+
+        if (rs.next()) { newId = rs.getInt("LastId") + 1; }
+
+        return newId;
+    }
+
+    protected static int getDepartmentLastId() throws SQLException {
+        int newId = 0;
+
+        String getLastIdQuery = "SELECT MAX(Id) AS LastId FROM department";
+
+		st = auxConn.createStatement();
+        rs = st.executeQuery(getLastIdQuery);
+
+        if (rs.next()) { newId = rs.getInt("LastId") + 1; }
+
+        return newId;
+    }
 }
