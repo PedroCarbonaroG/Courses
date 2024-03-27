@@ -25,20 +25,20 @@ public class Prompt {
             SellerDao sellerDao;
             Seller seller;
 
-            System.out.println("======================= TEST 1 - FIND BY ID =======================");
+            System.out.println("======================= TEST 1 - FIND SELLER BY ID =======================");
             sellerDao = DaoFactory.createSellerDao();
             seller = sellerDao.findById(3);
             System.out.println(seller);
 
-            System.out.println("\n======================= TEST 2 - FIND BY DEPARTMENT =======================");
+            System.out.println("\n======================= TEST 2 - FIND SELLER BY DEPARTMENT =======================");
             list = sellerDao.findByDepartment(seller.getDepartment());
             list.forEach(x -> System.out.println(x));
 
-            System.out.println("\n======================= TEST 3 - FIND BY DEPARTMENT ID =======================");
+            System.out.println("\n======================= TEST 3 - FIND SELLER BY DEPARTMENT ID =======================");
             list = sellerDao.findByDepartmentId(2);
             list.forEach(x -> System.out.println(x));
 
-            System.out.println("\n======================= TEST 4 - FIND ALL =======================");
+            System.out.println("\n======================= TEST 4 - FIND ALL SELLERS =======================");
             list = sellerDao.findAll();
             list.forEach(x -> System.out.println(x));
 
@@ -47,7 +47,7 @@ public class Prompt {
             sellerDao.add(seller);
             System.out.println(sellerDao.findById(seller.getId()));
 
-            System.out.println("\n======================= TEST 6 - UPDATE =======================");
+            System.out.println("\n======================= TEST 6 - UPDATE SELLER =======================");
             System.out.println(sellerDao.findById(5));
             seller = sellerDao.findById(5);
             seller.setName("Bob Smart");
@@ -55,7 +55,7 @@ public class Prompt {
             sellerDao.update(seller);
             System.out.println(sellerDao.findById(5));
 
-            System.out.println("\n======================= TEST 7 - DELETE =======================");
+            System.out.println("\n======================= TEST 7 - DELETE SELLER =======================");
             if (sellerDao.deleteById(7)) {
                 System.out.println("Deleted!");
             }
