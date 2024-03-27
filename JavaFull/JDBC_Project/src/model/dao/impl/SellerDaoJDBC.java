@@ -52,7 +52,21 @@ public class SellerDaoJDBC extends DB implements SellerDao {
     public boolean update(Seller seller) throws SQLException {
         boolean updated = false;
 
-        //...
+        ps = conn.prepareStatement(
+            "UPDATE seller " +
+            "SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? " +
+            "WHERE id = ?"
+        );
+
+        ps.setString(1, seller.getName());
+        ps.setString(2, seller.getEmail());
+        ps.setDate(3, new java.sql.Date(seller.getBirthDate().getTime()));
+        ps.setDouble(4, seller.getBaseSalary());
+        ps.setInt(5, seller.getDepartment().getId());
+        ps.setInt(6, seller.getId());
+
+        ps.executeUpdate();
+        updated = true;
 
         return updated;
     }

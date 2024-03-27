@@ -32,26 +32,30 @@ public class Prompt {
 
             System.out.println("\n======================= TEST 2 - FIND BY DEPARTMENT =======================");
             list = sellerDao.findByDepartment(seller.getDepartment());
-            for (Seller s : list) {
-                System.out.println(s);
-            }
+            list.forEach(x -> System.out.println(x));
 
             System.out.println("\n======================= TEST 3 - FIND BY DEPARTMENT ID =======================");
             list = sellerDao.findByDepartmentId(2);
-            for (Seller s : list) {
-                System.out.println(s);
-            }
+            list.forEach(x -> System.out.println(x));
 
             System.out.println("\n======================= TEST 4 - FIND ALL =======================");
             list = sellerDao.findAll();
-            for (Seller s : list) {
-                System.out.println(s);
-            }
+            list.forEach(x -> System.out.println(x));
 
             System.out.println("\n======================= TEST 5 - INSERT INTO SELLER =======================");
             seller = new Seller(null, "piter", "piter@gmail.com", new Date(), 5000, new Department(2, null));
             sellerDao.add(seller);
             System.out.println(sellerDao.findById(seller.getId()));
+
+            System.out.println("\n======================= TEST 6 - UPDATE =======================");
+            System.out.println(sellerDao.findById(5));
+            seller = sellerDao.findById(5);
+            seller.setName("Bob Smart");
+            seller.setEmail("bobsmart@gmail.com");
+            sellerDao.update(seller);
+            System.out.println(sellerDao.findById(5));
+
+            System.out.println("\n======================= TEST 7 - DELETE =======================");
         }
 
         catch (SQLException e) { throw new DbException(e.getMessage()); }
