@@ -18,26 +18,34 @@ public class Prompt {
 
         try {
 
+            List<Seller> list;
+
             System.out.println("======================= TEST 1 - FIND BY ID =======================");
             SellerDao sellerDao = DaoFactory.createSellerDao();
             Seller seller = sellerDao.findById(3);
             System.out.println(seller);
 
             System.out.println("\n======================= TEST 2 - FIND BY DEPARTMENT =======================");
-            List<Seller> list1 = sellerDao.findByDepartment(seller.getDepartment());
-            for (Seller s : list1) {
+            list = sellerDao.findByDepartment(seller.getDepartment());
+            for (Seller s : list) {
                 System.out.println(s);
             }
 
             System.out.println("\n======================= TEST 3 - FIND BY DEPARTMENT ID =======================");
-            List<Seller> list2 = sellerDao.findByDepartmentId(2);
-            for (Seller s : list2) {
+            list = sellerDao.findByDepartmentId(2);
+            for (Seller s : list) {
                 System.out.println(s);
             }
 
-            System.out.println("\n======================= TEST 4 - ??? =======================");
+            System.out.println("\n======================= TEST 4 - FIND ALL =======================");
+            list = sellerDao.findAll();
+            for (Seller s : list) {
+                System.out.println(s);
+            }
+
+            System.out.println("\n======================= TEST 5 - ??? =======================");
         }
-        
+
         catch (SQLException e) { throw new DbException(e.getMessage()); }
         
         finally {
